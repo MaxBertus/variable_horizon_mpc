@@ -1,19 +1,19 @@
 clear all;
 close all;
 
-plotting = true;
+plotting = false;
 alg_fmincon = 'sqp';
-fixed_horizon = false;
-sim_perception_range = true;
+fixed_horizon = true;
+sim_perception_range = false;
 sim_noise = false;
 sigma_2 = (0.15/3)^2;
 eps_loose_grip = 0.15;
 
-N_short = 7;
+N_short = 5;
 N_long = 15;
 N_fixed = 15;
 
-env_name = "corridor_bar";
+env_name = "two_obs";
 
 traj_fig_name = "trajectory.jpg";
 coord_fig_name = "coordinates.jpg";
