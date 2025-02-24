@@ -1,7 +1,8 @@
-function [p_tp1, X_L, qi, error, u_opt] = leaderMPCandUpdate(...
+function [p_tp1, X_L, qi, error, u_opt] = leaderMPCandUpdateOriginal(...
                             plant, p_t, N, optParams, obstacles, U_l_old)
-% execute the MPC for the leader
-
+ 
+% p_t is the actual state of the agent q(0)
+% compute the MPC output
 [qi, ~] = getObstacleInfo(obstacles, p_t(1:2));
 
 % get params
@@ -21,19 +22,13 @@ v_lim = optParams.v_lim;
 f = F'*p_t;
 Ac = G;    bc = W + S*p_t;
 
-% perform minimization with fmincon in order to use a functional cost for
-% the distance between leader and obstalces
-options = optimoptions('fmincon','Algorithm','active-set',...
-        'OptimalityTolerance',1e-1, 'SpecifyObjectiveGradient',false,...
-        'Display', 'none');
+% perform quadratic optimization
+options =  optimset('Display','off');
+[u_opt, ~, exitflag, output, ~] = quadprog(H, f, Ac, bc, [], [], [], [], U_l_old, options); % input horizon
+u_opt_reshaped = reshape(u_opt,[2,N]);
 
-[u_opt] = fmincon(...
-             @(U) leaderCostFun(U, H, f),...
-             U_l_old, Ac, bc, [], [], [], [], [], options);
-
-u_opt_reshaped = reshape(u_opt,[2,N]); 
-
-error = 0;
+error.QPexitflag = exitflag;
+error.QPoutput = output;
 
 % model dynamics update, needed to give path intention to follower
 p_pred = zeros([4, N]); % will have x(1)..x(N)
