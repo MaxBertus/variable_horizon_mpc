@@ -25,14 +25,20 @@ f = 2*Sd_bar'*P_bar'*P_bar*Td_bar*x_0;
 % realaboration of matrices for quadprog function 
 Ac = G;    bc = W + S*x_0;
 
-% perform quadratic optimization
-options =  optimset('Display','off');
-[u_opt, ~, exitflag, output, ~] = quadprog(H, f, Ac, bc, [], [], [], [], U_l_old, options);
-u_opt_reshaped = reshape(u_opt,[2,N]);
+options = optimoptions('fmincon','Algorithm','active-set',...
+        'OptimalityTolerance',1e-1, 'SpecifyObjectiveGradient',false,...
+        'Display', 'none');
 
-error.QPexitflag = exitflag;
-error.QPoutput = output;
+[u_opt, ~, exitflag] = fmincon(...
+             @(U) leaderCostFunHalt(U, x_0, T_bar, S_bar, N, 4),...
+             U_l_old, Ac, bc, [], [], [], [], [], options);
 
+u_opt_reshaped = reshape(u_opt,[2,N]); 
+
+% error.QPexitflag = exitflag;
+% error.QPoutput = output;
+
+error = exitflag;
 
 % model dynamics update, needed to give path intention to follower
 p_pred = zeros([4, N]); % will have x(1)..x(N)

@@ -21,19 +21,17 @@ v_lim = optParams.v_lim;
 f = F'*p_t;
 Ac = G;    bc = W + S*p_t;
 
-% perform minimization with fmincon in order to use a functional cost for
-% the distance between leader and obstalces
 options = optimoptions('fmincon','Algorithm','active-set',...
         'OptimalityTolerance',1e-1, 'SpecifyObjectiveGradient',false,...
         'Display', 'none');
 
-[u_opt] = fmincon(...
+[u_opt, ~, exitflag] = fmincon(...
              @(U) leaderCostFun(U, H, f),...
              U_l_old, Ac, bc, [], [], [], [], [], options);
 
 u_opt_reshaped = reshape(u_opt,[2,N]); 
 
-error = 0;
+error = exiflag;
 
 % model dynamics update, needed to give path intention to follower
 p_pred = zeros([4, N]); % will have x(1)..x(N)
