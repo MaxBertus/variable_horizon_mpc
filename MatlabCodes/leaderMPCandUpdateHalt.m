@@ -8,14 +8,14 @@ function [p_tp1, X_L, qi, error, u_opt] = leaderMPCandUpdateHalt(...
 u_lim = optParams.u_lim;
 v_lim = optParams.v_lim;
 
-% construct cost weights matrices... should be precompiled
-S_bar = pe.S_bar;
-T_bar = pe.T_bar;
 
 % get constraints matrices
 [G,W,S] = rigidBodyConstraints(plant.A, plant.B, x_0, qi, N, u_lim, v_lim, optParams.robotShape);
 % realaboration of matrices for quadprog function 
 Ac = G;    bc = W + S*x_0;
+
+T_bar = getTbar(plant.A,N);
+S_bar = getSbar(plant.A,plant.B,N);
 
 options = optimoptions('fmincon','Algorithm',alg_option,...
         'OptimalityTolerance',1e-1, 'SpecifyObjectiveGradient',false,...
