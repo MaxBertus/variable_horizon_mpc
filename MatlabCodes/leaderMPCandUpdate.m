@@ -1,5 +1,5 @@
 function [p_tp1, X_L, qi, error, u_opt] = leaderMPCandUpdate(...
-                            plant, p_t, N, optParams, obstacles, U_l_old)
+                            plant, p_t, N, optParams, obstacles, U_l_old, alg_option)
 % execute the MPC for the leader
 
 [qi, ~] = getObstacleInfo(obstacles, p_t(1:2));
@@ -21,7 +21,7 @@ v_lim = optParams.v_lim;
 f = F'*p_t;
 Ac = G;    bc = W + S*p_t;
 
-options = optimoptions('fmincon','Algorithm','active-set',...
+options = optimoptions('fmincon','Algorithm',alg_option,...
         'OptimalityTolerance',1e-1, 'SpecifyObjectiveGradient',false,...
         'Display', 'none');
 
@@ -31,7 +31,7 @@ options = optimoptions('fmincon','Algorithm','active-set',...
 
 u_opt_reshaped = reshape(u_opt,[2,N]); 
 
-error = exiflag;
+error = exitflag;
 
 % model dynamics update, needed to give path intention to follower
 p_pred = zeros([4, N]); % will have x(1)..x(N)

@@ -1,31 +1,23 @@
 function [p_tp1, X_L, qi, error, u_opt] = leaderMPCandUpdateHalt(...
-                            plant, x_0, N, optParams, obstacles, U_l_old)
+                            plant, x_0, N, optParams, obstacles, U_l_old, alg_option)
 
 % compute the MPC output
 [qi, ~] = getObstacleInfo(obstacles, x_0(1:2));
 
 % get params
-Q = optParams.Q;
-R = optParams.R;
-P = optParams.P;
 u_lim = optParams.u_lim;
 v_lim = optParams.v_lim;
 
 % construct cost weights matrices... should be precompiled
-pe = optParams.precompiledElements;
-P =  pe.P;
-P_bar = pe.P_bar;
-Sd_bar = pe.Sd_bar;
-Td_bar = pe.Td_bar;
-H = Sd_bar'*P_bar'*P_bar*Sd_bar;
-f = 2*Sd_bar'*P_bar'*P_bar*Td_bar*x_0;
+S_bar = pe.S_bar;
+T_bar = pe.T_bar;
 
 % get constraints matrices
 [G,W,S] = rigidBodyConstraints(plant.A, plant.B, x_0, qi, N, u_lim, v_lim, optParams.robotShape);
 % realaboration of matrices for quadprog function 
 Ac = G;    bc = W + S*x_0;
 
-options = optimoptions('fmincon','Algorithm','active-set',...
+options = optimoptions('fmincon','Algorithm',alg_option,...
         'OptimalityTolerance',1e-1, 'SpecifyObjectiveGradient',false,...
         'Display', 'none');
 
