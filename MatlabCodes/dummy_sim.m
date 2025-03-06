@@ -1,9 +1,9 @@
 clear all;
 close all;
 
-plotting = false;
+plotting = true;
 alg_fmincon = 'active-set';
-fixed_horizon = true;
+fixed_horizon = false;
 sim_perception_range = true;
 sim_noise = false;
 sigma_2 = (0.15/3)^2;
