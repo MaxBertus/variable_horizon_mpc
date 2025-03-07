@@ -13,7 +13,7 @@ N_short = 5;
 N_long = 15;
 N_fixed = 20;
 
-env_name = "three_obs"; % "no_obs", "two_obs", "three_obs", "valzer"
+env_name = "valzer"; % "no_obs", "two_obs", "three_obs", "valzer"
 
 fprintf(['plotting=%d, alg_fmincon=%s, fixed_horizon=%d, sim_perception_range=%d, sim_noise=%d, ' ...
          'sigma_2=%.5f, eps_loose_grip=%.2f, N_short=%d, N_long=%d, N_fixed=%d, env_name=%s\n'], ...
