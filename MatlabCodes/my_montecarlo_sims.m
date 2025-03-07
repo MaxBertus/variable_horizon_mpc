@@ -1,0 +1,111 @@
+clear all;
+close all;
+
+plotting = false;
+alg_fmincon = 'active-set';
+sim_noise = true;
+sigma_2 = (0.02/3)^2;
+eps_loose_grip = 0.01;
+N = 15;
+
+N_sims = 2;
+
+env_name = "three_obs";
+
+success = 0;
+
+
+for sim_index = 1:N_sims
+    disp("SIMULATION #: " + sim_index)
+    simCooperativeTransport;
+
+    if(min_obs_dist > 0)
+
+        success = success + 1;
+
+        max_time_exe_mc(success) = max_time_exe;
+        min_time_exe_mc(success) = min_time_exe;
+        mean_tot_time_mc(success) = mean_tot_time;
+        tot_ex_time_mc(success) = tot_ex_time;
+        max_form_err_mc(success) = max_form_err*10^3;
+        mean_form_err_mc(success) = mean_form_err*10^3;
+        min_obs_dist_mc(success) = min_obs_dist*10^3;
+
+    end
+
+    close all;
+
+    clearvars -except plotting alg_fmincon sim_noise sigma_2 eps_loose_grip  N N_sims env_name sim_index ...
+        max_time_exe_mc min_time_exe_mc mean_tot_time_mc tot_ex_time_mc max_form_err_mc mean_form_err_mc min_obs_dist_mc success
+end
+
+disp( "########################################" + newline + ...
+      "Success rate [%] : " + success/sim_index*100 + newline + ...
+      "Max ET [s]       : " + mean(max_time_exe_mc) + " " + char(177) + " " +  std(max_time_exe_mc) + newline + ...
+      "Min ET [s]       : " + mean(min_time_exe_mc) + " " +  char(177) + " " +  std(min_time_exe_mc) + newline + ...
+      "Mean ET [s]      : " + mean(mean_tot_time_mc) + " " +  char(177) + " " +  std(mean_tot_time_mc) + newline + ...           
+      "Total ET [s]     : " + mean(tot_ex_time_mc) + " " +  char(177) + " " +  std(tot_ex_time_mc) + newline + ...
+      "---" + newline + ...
+      "Max f_e [mm]      : " + mean(max_form_err_mc) + " " +  char(177) + " " +  std(max_form_err_mc) + newline + ...
+      "Mean f_e [mm]     : " + mean(mean_form_err_mc) + " " +  char(177) + " " +  std(mean_form_err_mc) + newline + ...
+      "Min distance [mm] : " + mean(min_obs_dist_mc) + " " +  char(177) + " " +  std(min_obs_dist_mc) + newline + ...
+      "########################################" + newline ...
+    )
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+clear all;
+close all;
+
+plotting = false;
+alg_fmincon = 'active-set';
+sim_noise = true;
+sigma_2 = (0.02/3)^2;
+eps_loose_grip = 0.01;
+N = 15;
+
+N_sims = 2;
+
+env_name = "valzer";
+
+success = 0;
+
+
+for sim_index = 1:N_sims
+    disp("SIMULATION #: " + sim_index)
+    simCooperativeTransport;
+
+    if(min_obs_dist > 0)
+
+        success = success + 1;
+
+        max_time_exe_mc(success) = max_time_exe;
+        min_time_exe_mc(success) = min_time_exe;
+        mean_tot_time_mc(success) = mean_tot_time;
+        tot_ex_time_mc(success) = tot_ex_time;
+        max_form_err_mc(success) = max_form_err*10^3;
+        mean_form_err_mc(success) = mean_form_err*10^3;
+        min_obs_dist_mc(success) = min_obs_dist*10^3;
+
+    end
+
+    close all;
+
+    clearvars -except plotting alg_fmincon sim_noise sigma_2 eps_loose_grip  N N_sims env_name sim_index ...
+        max_time_exe_mc min_time_exe_mc mean_tot_time_mc tot_ex_time_mc max_form_err_mc mean_form_err_mc min_obs_dist_mc success
+end
+
+disp( "########################################" + newline + ...
+      "Success rate [%] : " + success/sim_index*100 + newline + ...
+      "Max ET [s]       : " + mean(max_time_exe_mc) + " " + char(177) + " " +  std(max_time_exe_mc) + newline + ...
+      "Min ET [s]       : " + mean(min_time_exe_mc) + " " +  char(177) + " " +  std(min_time_exe_mc) + newline + ...
+      "Mean ET [s]      : " + mean(mean_tot_time_mc) + " " +  char(177) + " " +  std(mean_tot_time_mc) + newline + ...           
+      "Total ET [s]     : " + mean(tot_ex_time_mc) + " " +  char(177) + " " +  std(tot_ex_time_mc) + newline + ...
+      "---" + newline + ...
+      "Max f_e [mm]      : " + mean(max_form_err_mc) + " " +  char(177) + " " +  std(max_form_err_mc) + newline + ...
+      "Mean f_e [mm]     : " + mean(mean_form_err_mc) + " " +  char(177) + " " +  std(mean_form_err_mc) + newline + ...
+      "Min distance [mm] : " + mean(min_obs_dist_mc) + " " +  char(177) + " " +  std(min_obs_dist_mc) + newline + ...
+      "########################################" + newline ...
+    )
+
