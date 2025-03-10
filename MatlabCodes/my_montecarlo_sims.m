@@ -1,18 +1,24 @@
+clc
 clear all;
 close all;
+
+mc = tic;
 
 plotting = false;
 alg_fmincon = 'active-set';
 fixed_horizon = false;
 sim_perception_range = true;
 sim_noise = true;
-sigma_2 = (0.02/3)^2;
+sigma_2 = (0.001/3)^2;
+sigma_2_t = (deg2rad(1)/3)^2;
+sigma_2_v = (0.0001/3)^2;
+sigma_2_o = (deg2rad(0.1)/3)^2;
 eps_loose_grip = 0.01;
 
 N_short = 5;
 N_long = 15;
 
-N_sims = 2;
+N_sims = 100;
 
 env_name = "three_obs";
 
@@ -39,8 +45,8 @@ for sim_index = 1:N_sims
 
     close all;
 
-    clearvars -except plotting alg_fmincon fixed_horizon sim_perception_range sim_noise sigma_2 eps_loose_grip N_short N_long N_sims env_name sim_index ...
-        max_time_exe_mc min_time_exe_mc mean_tot_time_mc tot_ex_time_mc max_form_err_mc mean_form_err_mc min_obs_dist_mc success
+    clearvars -except plotting alg_fmincon fixed_horizon sim_perception_range sim_noise sigma_2 sigma_2_t sigma_2_v sigma_2_o eps_loose_grip N_short N_long N_sims env_name sim_index ...
+        max_time_exe_mc min_time_exe_mc mean_tot_time_mc tot_ex_time_mc max_form_err_mc mean_form_err_mc min_obs_dist_mc success mc
 end
 
 disp( "########################################" + newline + ...
@@ -58,24 +64,30 @@ disp( "########################################" + newline + ...
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+toc(mc);
 
 clear all;
 close all;
+
+mc = tic;
 
 plotting = false;
 alg_fmincon = 'active-set';
 fixed_horizon = false;
 sim_perception_range = true;
 sim_noise = true;
-sigma_2 = (0.02/3)^2;
+sigma_2 = (0.001/3)^2;
+sigma_2_t = (deg2rad(1)/3)^2;
+sigma_2_v = (0.0001/3)^2;
+sigma_2_o = (deg2rad(0.1)/3)^2;
 eps_loose_grip = 0.01;
 
 N_short = 5;
 N_long = 15;
 
-N_sims = 2;
+N_sims = 100;
 
-env_name = "three_obs";
+env_name = "valzer";
 
 success = 0;
 
@@ -100,8 +112,8 @@ for sim_index = 1:N_sims
 
     close all;
 
-    clearvars -except plotting alg_fmincon fixed_horizon sim_perception_range sim_noise sigma_2 eps_loose_grip N_short N_long N_sims env_name sim_index ...
-        max_time_exe_mc min_time_exe_mc mean_tot_time_mc tot_ex_time_mc max_form_err_mc mean_form_err_mc min_obs_dist_mc success
+    clearvars -except plotting alg_fmincon fixed_horizon sim_perception_range sim_noise sigma_2 sigma_2_t sigma_2_v sigma_2_o eps_loose_grip N_short N_long N_sims env_name sim_index ...
+        max_time_exe_mc min_time_exe_mc mean_tot_time_mc tot_ex_time_mc max_form_err_mc mean_form_err_mc min_obs_dist_mc success mc
 end
 
 disp( "########################################" + newline + ...
@@ -116,3 +128,5 @@ disp( "########################################" + newline + ...
       "Min distance [mm] : " + mean(min_obs_dist_mc) + " " +  char(177) + " " +  std(min_obs_dist_mc) + newline + ...
       "########################################" + newline ...
     )
+
+toc(mc);
