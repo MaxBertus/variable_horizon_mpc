@@ -1,18 +1,28 @@
+clc
 clear all;
 close all;
+
+mc = tic;
 
 plotting = false;
 alg_fmincon = 'active-set';
 sim_noise = true;
-sigma_2 = (0.02/3)^2;
-eps_loose_grip = 0.01;
+sigma_2 = (0.005/3)^2;
+eps_loose_grip = 0.1;
 N = 15;
 
-N_sims = 2;
+N_sims = 100;
 
 env_name = "three_obs";
 
 success = 0;
+max_time_exe_mc(1) = 0;
+min_time_exe_mc(1) = 0;
+mean_tot_time_mc(1) = 0;
+tot_ex_time_mc(1) = 0;
+max_form_err_mc(1) = 0;
+mean_form_err_mc(1) = 0;
+min_obs_dist_mc(1) = 0;
 
 
 for sim_index = 1:N_sims
@@ -36,7 +46,7 @@ for sim_index = 1:N_sims
     close all;
 
     clearvars -except plotting alg_fmincon sim_noise sigma_2 eps_loose_grip  N N_sims env_name sim_index ...
-        max_time_exe_mc min_time_exe_mc mean_tot_time_mc tot_ex_time_mc max_form_err_mc mean_form_err_mc min_obs_dist_mc success
+        max_time_exe_mc min_time_exe_mc mean_tot_time_mc tot_ex_time_mc max_form_err_mc mean_form_err_mc min_obs_dist_mc success mc
 end
 
 disp( "########################################" + newline + ...
@@ -53,23 +63,34 @@ disp( "########################################" + newline + ...
     )
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+toc(mc)
 
 clear all;
 close all;
 
+mc = tic;
+
 plotting = false;
 alg_fmincon = 'active-set';
 sim_noise = true;
-sigma_2 = (0.02/3)^2;
+sigma_2 = (0.005/3)^2;
 eps_loose_grip = 0.01;
 N = 15;
 
-N_sims = 2;
+N_sims = 100;
 
 env_name = "valzer";
 
 success = 0;
+max_time_exe_mc(1) = 0;
+min_time_exe_mc(1) = 0;
+mean_tot_time_mc(1) = 0;
+tot_ex_time_mc(1) = 0;
+max_form_err_mc(1) = 0;
+mean_form_err_mc(1) = 0;
+min_obs_dist_mc(1) = 0;
 
 
 for sim_index = 1:N_sims
@@ -93,7 +114,7 @@ for sim_index = 1:N_sims
     close all;
 
     clearvars -except plotting alg_fmincon sim_noise sigma_2 eps_loose_grip  N N_sims env_name sim_index ...
-        max_time_exe_mc min_time_exe_mc mean_tot_time_mc tot_ex_time_mc max_form_err_mc mean_form_err_mc min_obs_dist_mc success
+        max_time_exe_mc min_time_exe_mc mean_tot_time_mc tot_ex_time_mc max_form_err_mc mean_form_err_mc min_obs_dist_mc success mc
 end
 
 disp( "########################################" + newline + ...
@@ -109,3 +130,4 @@ disp( "########################################" + newline + ...
       "########################################" + newline ...
     )
 
+toc(mc)
