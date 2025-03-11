@@ -10,16 +10,21 @@ alg_fmincon = 'active-set';
 fixed_horizon = false;
 sim_perception_range = true;
 sim_noise = true;
-sigma_2 = (0.005/3)^2;
-sigma_2_t = (deg2rad(0.03)/3)^2;
-sigma_2_v = (0.001/3)^2;
-sigma_2_o = (deg2rad(0.05)/3)^2;
+% sigma_2 = 4.099e-7;   % (0.005/3)^2;
+% sigma_2_t = (deg2rad(sqrt(0.0012)))^2;   % (deg2rad(0.01)/3)^2;
+% sigma_2_v = 2.050e-6;
+% sigma_2_o = (deg2rad(sqrt(0.0024)))^2;  % (deg2rad(1.4142)/3)^2;
+sigma_2 = (0.001/3)^2;
+sigma_2_t = (deg2rad(0.01)/3)^2;
+sigma_2_v = (0.001/3*sqrt(2)/0.01)^2;
+sigma_2_o = (deg2rad(0.01)/3*sqrt(2)/0.01)^2;
+
 eps_loose_grip = 0.01;
 
 N_short = 5;
 N_long = 15;
 
-N_sims = 100;
+N_sims = 20;
 
 env_name = "two_obs";
 
@@ -27,7 +32,7 @@ success = 0;
 
 
 for sim_index = 1:N_sims
-    disp("SIMULATION #: " + sim_index)
+    disp("SIMULATION #: " + sim_index) 
     simCooperativeTransport;
 
     if(min_obs_dist > 0)
@@ -76,16 +81,17 @@ alg_fmincon = 'active-set';
 fixed_horizon = false;
 sim_perception_range = true;
 sim_noise = true;
-sigma_2 = (0.005/3)^2;
-sigma_2_t = (deg2rad(0.03)/3)^2;
-sigma_2_v = (0.001/3)^2;
-sigma_2_o = (deg2rad(0.05)/3)^2;
+sigma_2 = (0.001/3)^2;
+sigma_2_t = (deg2rad(0.01)/3)^2;
+sigma_2_v = (0.001/3*sqrt(2)/0.01)^2;
+sigma_2_o = (deg2rad(0.01)/3*sqrt(2)/0.01)^2;
+
 eps_loose_grip = 0.01;
 
 N_short = 5;
 N_long = 15;
 
-N_sims = 100;
+N_sims = 20;
 
 env_name = "three_obs";
 
@@ -143,16 +149,17 @@ alg_fmincon = 'active-set';
 fixed_horizon = false;
 sim_perception_range = true;
 sim_noise = true;
-sigma_2 = (0.005/3)^2;
-sigma_2_t = (deg2rad(0.03)/3)^2;
-sigma_2_v = (0.001/3)^2;
-sigma_2_o = (deg2rad(0.05)/3)^2;
+sigma_2 = (0.001/3)^2;
+sigma_2_t = (deg2rad(0.01)/3)^2;
+sigma_2_v = (0.001/3*sqrt(2)/0.01)^2;
+sigma_2_o = (deg2rad(0.01)/3*sqrt(2)/0.01)^2;
+
 eps_loose_grip = 0.01;
 
 N_short = 5;
 N_long = 15;
 
-N_sims = 100;
+N_sims = 20;
 
 env_name = "valzer";
 
