@@ -9,7 +9,7 @@ alg_fmincon = 'active-set';
 sim_noise = true;
 sigma_2 = (0.005/3)^2;
 eps_loose_grip = 0.01;
-N = 15;
+N = 5;
 
 N_sims = 100;
 
