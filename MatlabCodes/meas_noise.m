@@ -5,7 +5,7 @@ function [noise] = meas_noise(sigma_2, sigma_2_v, sim_noise)
     if sim_noise
         R1 = chol(sigma_2);
         R2 = chol(sigma_2_v);
-        noise = [randn*R1; randn*R1; randn*R1; randn*R2];
+        noise = [randn*R1; randn*R1; randn*R2; randn*R2];
     else
         noise = 0;
     end

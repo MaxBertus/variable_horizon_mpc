@@ -7,13 +7,13 @@ mc = tic;
 plotting = false;
 alg_fmincon = 'active-set';
 sim_noise = true;
-sigma_2 = (0.005/3)^2;
-sigma_2_v = (0.001/3)^2;
+sigma_2 =  (0.001/3)^2;
+sigma_2_v = (0.001/3*sqrt(2)/0.01)^2;
 
 eps_loose_grip = 0.01;
-N = 15;
+N = 5;
 
-N_sims = 100;
+N_sims = 20;
 
 env_name = "two_obs";
 
@@ -77,12 +77,12 @@ mc = tic;
 plotting = false;
 alg_fmincon = 'active-set';
 sim_noise = true;
-sigma_2 = (0.005/3)^2;
-sigma_2_v = (0.001/3)^2;
+sigma_2 =  (0.001/3)^2;
+sigma_2_v = (0.001/3*sqrt(2)/0.01)^2;
 eps_loose_grip = 0.01;
-N = 15;
+N = 5;
 
-N_sims = 100;
+N_sims = 20;
 
 env_name = "three_obs";
 
@@ -146,12 +146,12 @@ mc = tic;
 plotting = false;
 alg_fmincon = 'active-set';
 sim_noise = true;
-sigma_2 = (0.005/3)^2;
-sigma_2_v = (0.001/3)^2;
+sigma_2 =  (0.001/3)^2;
+sigma_2_v = (0.001/3*sqrt(2)/0.01)^2;
 eps_loose_grip = 0.01;
-N = 15;
+N = 5;
 
-N_sims = 100;
+N_sims = 20;
 
 env_name = "valzer";
 
