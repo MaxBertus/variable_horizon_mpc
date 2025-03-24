@@ -19,5 +19,4 @@ function [noise] = meas_noise(sigma_2, sigma_2_t, sigma_2_v, sigma_2_o, sim_nois
     else
         noise = 0;
     end
-    end1
 

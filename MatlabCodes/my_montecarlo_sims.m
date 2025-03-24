@@ -5,9 +5,9 @@ close all;
 
 mc = tic;
 
-plotting = false;
+plotting = true;
 alg_fmincon = 'active-set';
-fixed_horizon = false;
+fixed_horizon = true;
 sim_perception_range = true;
 sim_noise = true;
 % sigma_2 = 4.099e-7;   % (0.005/3)^2;
@@ -21,12 +21,13 @@ sigma_2_o = (deg2rad(0.01)/3*sqrt(2)/0.01)^2;
 
 eps_loose_grip = 0.01;
 
-N_short = 5;
+N_short = 15;
 N_long = 15;
+N_fixed = 15;
 
 N_sims = 20;
 
-env_name = "two_obs";
+env_name = "valzer";
 
 success = 0;
 
@@ -51,7 +52,7 @@ for sim_index = 1:N_sims
 
     close all;
 
-    clearvars -except plotting alg_fmincon fixed_horizon sim_perception_range sim_noise sigma_2 sigma_2_t sigma_2_v sigma_2_o eps_loose_grip N_short N_long N_sims env_name sim_index ...
+    clearvars -except plotting alg_fmincon fixed_horizon sim_perception_range sim_noise sigma_2 sigma_2_t sigma_2_v sigma_2_o eps_loose_grip N_short N_long N_fixed N_sims env_name sim_index ...
         max_time_exe_mc min_time_exe_mc mean_tot_time_mc tot_ex_time_mc max_form_err_mc mean_form_err_mc min_obs_dist_mc success mc
 end
 
@@ -78,7 +79,7 @@ mc = tic;
 
 plotting = false;
 alg_fmincon = 'active-set';
-fixed_horizon = false;
+fixed_horizon = true;
 sim_perception_range = true;
 sim_noise = true;
 sigma_2 = (0.001/3)^2;
@@ -88,8 +89,9 @@ sigma_2_o = (deg2rad(0.01)/3*sqrt(2)/0.01)^2;
 
 eps_loose_grip = 0.01;
 
-N_short = 5;
+N_short = 15;
 N_long = 15;
+N_fixed = 15;
 
 N_sims = 20;
 
@@ -118,7 +120,7 @@ for sim_index = 1:N_sims
 
     close all;
 
-    clearvars -except plotting alg_fmincon fixed_horizon sim_perception_range sim_noise sigma_2 sigma_2_t sigma_2_v sigma_2_o eps_loose_grip N_short N_long N_sims env_name sim_index ...
+    clearvars -except plotting alg_fmincon fixed_horizon sim_perception_range sim_noise sigma_2 sigma_2_t sigma_2_v sigma_2_o eps_loose_grip N_short N_long N_fixed N_sims env_name sim_index ...
         max_time_exe_mc min_time_exe_mc mean_tot_time_mc tot_ex_time_mc max_form_err_mc mean_form_err_mc min_obs_dist_mc success mc
 end
 
@@ -146,7 +148,7 @@ mc = tic;
 
 plotting = false;
 alg_fmincon = 'active-set';
-fixed_horizon = false;
+fixed_horizon = true;
 sim_perception_range = true;
 sim_noise = true;
 sigma_2 = (0.001/3)^2;
@@ -156,8 +158,9 @@ sigma_2_o = (deg2rad(0.01)/3*sqrt(2)/0.01)^2;
 
 eps_loose_grip = 0.01;
 
-N_short = 5;
+N_short = 15;
 N_long = 15;
+N_fixed = 15;
 
 N_sims = 20;
 
@@ -186,7 +189,7 @@ for sim_index = 1:N_sims
 
     close all;
 
-    clearvars -except plotting alg_fmincon fixed_horizon sim_perception_range sim_noise sigma_2 sigma_2_t sigma_2_v sigma_2_o eps_loose_grip N_short N_long N_sims env_name sim_index ...
+    clearvars -except plotting alg_fmincon fixed_horizon sim_perception_range sim_noise sigma_2 sigma_2_t sigma_2_v sigma_2_o eps_loose_grip N_short N_long N_fixed N_sims env_name sim_index ...
         max_time_exe_mc min_time_exe_mc mean_tot_time_mc tot_ex_time_mc max_form_err_mc mean_form_err_mc min_obs_dist_mc success mc
 end
 
